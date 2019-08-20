@@ -1,0 +1,90 @@
+
+
+$container-width: 960px
+// TODO: set responsive container
+.container
+    margin: 0 auto
+    max-width: $container-width
+    padding: 0
+    position: relative
+    height: 100vh
+
+footer
+    display: none
+
+
+$postcard-width: 400px
+$postcard-height: 266px
+$wheel-inner-size: 1200px
+
+$wheel-start-angle: 90 //deg
+$wheel-interval: 20 //deg
+
+.wheel
+    width: $wheel-inner-size
+    //background: red
+    height: $wheel-inner-size
+    position: fixed
+    transform: rotate(-20deg)
+    transform-origin: $postcard-width/2 $wheel-inner-size
+    margin-left: -1 * $wheel-inner-size + $postcard-height / 2
+    margin-top: -1 * $wheel-inner-size //+ $postcard-height / 2
+    top: 50vh
+    transition: 1s transform linear
+    &:hover
+        transform: rotate(0deg)
+    // TODO : keep that model ?
+    .postcard
+        transform-origin: $postcard-width/2 $wheel-inner-size
+        position: absolute
+        top: 0
+        left: 0
+        .gatsby-image-wrapper
+            width: $postcard-width
+            transform: rotate(-90deg)
+        @for $i from 1 through 12
+            &:nth-child(#{$i})
+                transform: rotate(#{ $wheel-start-angle + ( $i - 1 ) * $wheel-interval}deg)
+
+$wheel-store-margin: 80px
+$project-height: 70px
+
+.store
+    float: right
+    width: $container-width - $postcard-width - $wheel-store-margin
+    //background: red
+    .project
+        width: 100%
+        display: block
+        height: $project-height
+        h1
+            position: absolute
+            opacity: 1
+        h1:last-of-type
+            transition: 0.1s margin linear
+        h1:first-child
+            color: Green
+            opacity: 0
+            transition: 0.1s opacity linear
+        .tag
+            float: left
+            margin-top: $project-height - 20px
+            border: 1px solid Green
+            padding: 5px 10px
+            margin-right: 10px
+        .year
+            float: right
+            margin-top: $project-height - 20px
+            padding: 5px 10px
+            color: White
+            border: 1px solid Green
+            background: Green
+        &:hover
+            h1:last-of-type
+                margin-top: -2px
+                margin-left: 2px
+            h1:first-child
+                opacity: 1
+
+
+

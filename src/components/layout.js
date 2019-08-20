@@ -10,43 +10,114 @@ import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 
 import Header from "./header"
+//import Footer from "./footer"
+import Image from "./image"
 import "./layout.css"
 
 const Layout = ({ children }) => {
-  const data = useStaticQuery(graphql`
-    query SiteTitleQuery {
-      site {
-        siteMetadata {
-          title
+  // const data = useStaticQuery(graphql`
+  //   query SiteTitleQuery {
+  //     site {
+  //       siteMetadata {
+  //         title
+  //       }
+  //     }
+  //   }
+  // `)
+  const projects = useStaticQuery(graphql`
+  query {
+    allPrismicProject {
+      edges {
+        node {
+          data {
+            color
+            for
+            name {
+              text
+            }
+            with
+            year
+            tags {
+              tag {
+                raw {
+                  slug
+                }
+              }
+            }
+          }
         }
       }
     }
+  }
   `)
+  console.log(projects)
 
+  // TODO: keep the header?
+  // TODO: appropriate way to import the image
+  const projectsElements = projects.allPrismicProject.edges.map((item, key) =>
+        <div className="project">
+            <h1 style={{color: item.node.data.color}}>{item.node.data.name.text}</h1>
+            <h1>{item.node.data.name.text}</h1>
+            <div className="tag">development</div>
+            <div className="tag">concept</div>
+            <div className="year">2013</div>
+        </div>
+    );
   return (
     <>
-      <Header siteTitle={data.site.siteMetadata.title} />
-      <div
-        style={{
-          margin: `0 auto`,
-          maxWidth: 960,
-          padding: `0px 1.0875rem 1.45rem`,
-          paddingTop: 0,
-        }}
-      >
+      {/* <Header siteTitle={data.site.siteMetadata.title} /> */}
+      <div className="container">
+        <div className="wheel">
+          <div className="postcard">
+            <Image />
+          </div>
+          <div className="postcard">
+            <Image />
+          </div>
+          <div className="postcard">
+            <Image />
+          </div>
+          <div className="postcard">
+            <Image />
+          </div>
+          <div className="postcard">
+            <Image />
+          </div>
+          <div className="postcard">
+            <Image />
+          </div>
+          <div className="postcard">
+            <Image />
+          </div>
+          <div className="postcard">
+            <Image />
+          </div>
+          <div className="postcard">
+            <Image />
+          </div>
+          <div className="postcard">
+            <Image />
+          </div>
+        </div>
+        
+        <div className="store">
+          {projectsElements}
+        </div>
+
+
+
         <main>{children}</main>
-        <footer>
-          © {new Date().getFullYear()}, Built with
-          {` `}
-          <a href="https://www.gatsbyjs.org">Gatsby</a>
-        </footer>
       </div>
     </>
   )
 }
+
+// TODO: add the footer
+// <Footer selfDescription="--- self description ---"/>
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
 }
 
 export default Layout
+
