@@ -30,6 +30,10 @@ module.exports = {
         theme_color: `#663399`,
         display: `minimal-ui`,
         icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+
+        nodeType: 'PrismicProject',
+        imagePath: 'edges.nodes[].data.cover.url',
+        name: 'coverImage'
       },
     },
     `gatsby-plugin-sass`,
@@ -40,7 +44,7 @@ module.exports = {
         accessToken: `${process.env.API_KEY}`,
         linkResolver: ({ node, key, value }) => project => `/${project.uid}`,
       },
-    },
+    }
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,

@@ -5,25 +5,21 @@
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
 
-import React from "react"
+import React, { useState } from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 
 import Header from "./header"
 //import Footer from "./footer"
 import Image from "./image"
+import Img from "gatsby-image"
 import "./layout.css"
 
 const Layout = ({ children }) => {
-  // const data = useStaticQuery(graphql`
-  //   query SiteTitleQuery {
-  //     site {
-  //       siteMetadata {
-  //         title
-  //       }
-  //     }
-  //   }
-  // `)
+  const [wheelLevel, setWheelLevel] = useState(
+    0
+  );
+
   const projects = useStaticQuery(graphql`
   query {
     allPrismicProject {
@@ -44,67 +40,52 @@ const Layout = ({ children }) => {
                 }
               }
             }
+            cover {
+              localFile {
+                childImageSharp {
+                  fluid(maxWidth: 400, maxHeight: 250) {
+                    ...GatsbyImageSharpFluid
+                  }
+                }
+              }
+            }
           }
         }
       }
     }
   }
   `)
-  console.log(projects)
+
 
   // TODO: keep the header?
   // TODO: appropriate way to import the image
+  // TODO: add a graphical signature indicating the current project in the wheel
   const projectsElements = projects.allPrismicProject.edges.map((item, key) =>
-        <div className="project">
+        <div className="project" id={key} onMouseEnter={event => setWheelLevel(key)}>
             <h1 style={{color: item.node.data.color}}>{item.node.data.name.text}</h1>
             <h1>{item.node.data.name.text}</h1>
-            <div className="tag">development</div>
-            <div className="tag">concept</div>
-            <div className="year">2013</div>
+            {
+              item.node.data.tags.map((item) => <div className="tag">{item.tag.raw.slug}</div>)
+            }
+            <div className="year">{item.node.data.year}</div>
         </div>
     );
+  
+  const projectPictures = projects.allPrismicProject.edges.map((item, key) =>
+        <div className="postcard">
+            <Img fluid={item.node.data.cover.localFile.childImageSharp.fluid} />
+        </div>
+  );
   return (
     <>
       {/* <Header siteTitle={data.site.siteMetadata.title} /> */}
       <div className="container">
-        <div className="wheel">
-          <div className="postcard">
-            <Image />
-          </div>
-          <div className="postcard">
-            <Image />
-          </div>
-          <div className="postcard">
-            <Image />
-          </div>
-          <div className="postcard">
-            <Image />
-          </div>
-          <div className="postcard">
-            <Image />
-          </div>
-          <div className="postcard">
-            <Image />
-          </div>
-          <div className="postcard">
-            <Image />
-          </div>
-          <div className="postcard">
-            <Image />
-          </div>
-          <div className="postcard">
-            <Image />
-          </div>
-          <div className="postcard">
-            <Image />
-          </div>
+        <div className={"wheel level-" + wheelLevel}>
+          {projectPictures}
         </div>
-        
         <div className="store">
           {projectsElements}
         </div>
-
-
 
         <main>{children}</main>
       </div>

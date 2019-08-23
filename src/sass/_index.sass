@@ -20,19 +20,22 @@ $wheel-inner-size: 1200px
 $wheel-start-angle: 90 //deg
 $wheel-interval: 20 //deg
 
+$item-max: 12 // Max number of items
+
 .wheel
     width: $wheel-inner-size
     //background: red
     height: $wheel-inner-size
     position: fixed
-    transform: rotate(-20deg)
+    transform: rotate(0)
     transform-origin: $postcard-width/2 $wheel-inner-size
     margin-left: -1 * $wheel-inner-size + $postcard-height / 2
     margin-top: -1 * $wheel-inner-size //+ $postcard-height / 2
     top: 50vh
-    transition: 1s transform linear
-    &:hover
-        transform: rotate(0deg)
+    transition: .3s transform linear
+    @for $i from 0 through $item-max
+        &.level-#{$i}
+            transform: rotate( #{ -1 * ( $i ) * $wheel-interval}deg )
     // TODO : keep that model ?
     .postcard
         transform-origin: $postcard-width/2 $wheel-inner-size
@@ -42,17 +45,16 @@ $wheel-interval: 20 //deg
         .gatsby-image-wrapper
             width: $postcard-width
             transform: rotate(-90deg)
-        @for $i from 1 through 12
+        @for $i from 1 through $item-max
             &:nth-child(#{$i})
                 transform: rotate(#{ $wheel-start-angle + ( $i - 1 ) * $wheel-interval}deg)
 
 $wheel-store-margin: 80px
-$project-height: 70px
+$project-height: 100px
 
 .store
     float: right
     width: $container-width - $postcard-width - $wheel-store-margin
-    //background: red
     .project
         width: 100%
         display: block
@@ -68,13 +70,13 @@ $project-height: 70px
             transition: 0.1s opacity linear
         .tag
             float: left
-            margin-top: $project-height - 20px
+            margin-top: $project-height - 50px
             border: 1px solid Green
             padding: 5px 10px
             margin-right: 10px
         .year
             float: right
-            margin-top: $project-height - 20px
+            margin-top: $project-height - 50px
             padding: 5px 10px
             color: White
             border: 1px solid Green
