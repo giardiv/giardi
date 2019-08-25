@@ -1,17 +1,9 @@
-/**
- * Layout component that queries for data
- * with Gatsby's useStaticQuery component
- *
- * See: https://www.gatsbyjs.org/docs/use-static-query/
- */
-
 import React, { useState } from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
+import injectStyle from '../utils/injectStyle';
 
-import Header from "./header"
-//import Footer from "./footer"
-import Image from "./image"
+import Footer from "./footer"
 import Img from "gatsby-image"
 import "./layout.css"
 
@@ -65,17 +57,37 @@ const Layout = ({ children }) => {
             <h1 style={{color: item.node.data.color}}>{item.node.data.name.text}</h1>
             <h1>{item.node.data.name.text}</h1>
             {
-              item.node.data.tags.map((item) => <div className="tag">{item.tag.raw.slug}</div>)
+              item.node.data.tags.map((tag) => <div className="tag" style={{ borderColor: item.node.data.color}}>{tag.tag.raw.slug}</div>)
             }
-            <div className="year">{item.node.data.year}</div>
+            <div className="year" style={{ backgroundColor: item.node.data.color}}>{item.node.data.year}</div>
         </div>
     );
   
   const projectPictures = projects.allPrismicProject.edges.map((item, key) =>
         <div className="postcard">
-            <Img fluid={item.node.data.cover.localFile.childImageSharp.fluid} />
+            <Img className={ key == wheelLevel ? "selected" : "" } style={{ borderColor: item.node.data.color}} fluid={item.node.data.cover.localFile.childImageSharp.fluid} />
         </div>
   );
+
+  const gradientSteps = projects.allPrismicProject.edges.map((item, key) => {
+    const n = projects.allPrismicProject.edges.length
+    const p = Math.round(key * (100 / n));
+    return(p + "% {background-color: " + item.node.data.color +";}")
+  })
+  const gradient = `
+    @keyframes gradient {
+      `+ gradientSteps.join(" ") +`
+    }
+  `;
+  const blockColor = `
+    footer.open .block{
+      background-color: ` + projects.allPrismicProject.edges[0].node. data.color + `;
+    }
+  `
+  injectStyle(gradient);
+  injectStyle(blockColor);
+
+  console.log(gradient)
   return (
     <>
       {/* <Header siteTitle={data.site.siteMetadata.title} /> */}
@@ -86,15 +98,12 @@ const Layout = ({ children }) => {
         <div className="store">
           {projectsElements}
         </div>
-
         <main>{children}</main>
+        <Footer/>
       </div>
     </>
   )
 }
-
-// TODO: add the footer
-// <Footer selfDescription="--- self description ---"/>
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
