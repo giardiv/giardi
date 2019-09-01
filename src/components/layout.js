@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 import injectStyle from '../utils/injectStyle';
+import { Link } from "gatsby"
 
 import Footer from "./footer"
 import Img from "gatsby-image"
@@ -42,6 +43,7 @@ const Layout = ({ children }) => {
               }
             }
           }
+          slugs
         }
       }
     }
@@ -53,14 +55,16 @@ const Layout = ({ children }) => {
   // TODO: appropriate way to import the image
   // TODO: add a graphical signature indicating the current project in the wheel
   const projectsElements = projects.allPrismicProject.edges.map((item, key) =>
-        <div className="project" id={key} onMouseEnter={event => setWheelLevel(key)}>
-            <h1 style={{color: item.node.data.color}}>{item.node.data.name.text}</h1>
-            <h1>{item.node.data.name.text}</h1>
-            {
-              item.node.data.tags.map((tag) => <div className="tag" style={{ borderColor: item.node.data.color}}>{tag.tag.raw.slug}</div>)
-            }
-            <div className="year" style={{ backgroundColor: item.node.data.color}}>{item.node.data.year}</div>
-        </div>
+        <Link to={item.node.slugs}>
+          <div className="project" id={key} onMouseEnter={event => setWheelLevel(key)}>
+              <h1 style={{color: item.node.data.color}}>{item.node.data.name.text}</h1>
+              <h1>{item.node.data.name.text}</h1>
+              {
+                item.node.data.tags.map((tag) => <div className="tag" style={{ borderColor: item.node.data.color}}>{tag.tag.raw.slug}</div>)
+              }
+              <div className="year" style={{ backgroundColor: item.node.data.color}}>{item.node.data.year}</div>
+          </div>
+        </Link>
     );
   
   const projectPictures = projects.allPrismicProject.edges.map((item, key) =>
