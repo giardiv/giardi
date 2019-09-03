@@ -3,6 +3,8 @@ import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 import injectStyle from '../utils/injectStyle';
 import { Link } from "gatsby"
+import TransitionLink from "gatsby-plugin-transition-link"
+import anime from "animejs"
 
 import Footer from "./footer"
 import Img from "gatsby-image"
@@ -53,18 +55,35 @@ const Layout = ({ children }) => {
 
   // TODO: keep the header?
   // TODO: appropriate way to import the image
-  // TODO: add a graphical signature indicating the current project in the wheel
-  const projectsElements = projects.allPrismicProject.edges.map((item, key) =>
-        <Link to={item.node.slugs}>
-          <div className="project" id={key} onMouseEnter={event => setWheelLevel(key)}>
-              <h1 style={{color: item.node.data.color}}>{item.node.data.name.text}</h1>
-              <h1>{item.node.data.name.text}</h1>
-              {
-                item.node.data.tags.map((tag) => <div className="tag" style={{ borderColor: item.node.data.color}}>{tag.tag.raw.slug}</div>)
-              }
-              <div className="year" style={{ backgroundColor: item.node.data.color}}>{item.node.data.year}</div>
-          </div>
-        </Link>
+  // TODO: add a graphical signature indicating the current project in the wheel  
+
+  const projectsElements = projects.allPrismicProject.edges.map((item, key) =>{
+          const anim = (node, e, exit, entry) => {
+            anime({
+              targets: 'main',
+              translateX: 250
+            });
+          }
+          return(
+            <TransitionLink to={ "/" + item.node.slugs[0] }
+            exit={{
+              trigger: ({ node, e, exit, entry }) => anim(node, e, exit, entry)
+            }}
+            entry={{
+              trigger: ({ node, e, exit, entry }) => anim(node, e, exit, entry)
+            }}
+            >
+              <div className="project" id={key} onMouseEnter={event => setWheelLevel(key)}>
+                  <h1 style={{color: item.node.data.color}}>{item.node.data.name.text}</h1>
+                  <h1>{item.node.data.name.text}</h1>
+                  {
+                    item.node.data.tags.map((tag) => <div className="tag" key={tag.tag.raw.slug+key} style={{ borderColor: item.node.data.color}}>{tag.tag.raw.slug}</div>)
+                  }
+                  <div className="year" style={{ backgroundColor: item.node.data.color}}>{item.node.data.year}</div>
+              </div>
+            </TransitionLink>
+          )
+        }
     );
   
   const projectPictures = projects.allPrismicProject.edges.map((item, key) =>
@@ -91,7 +110,6 @@ const Layout = ({ children }) => {
   injectStyle(gradient);
   injectStyle(blockColor);
 
-  console.log(gradient)
   return (
     <>
       {/* <Header siteTitle={data.site.siteMetadata.title} /> */}

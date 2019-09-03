@@ -33,7 +33,7 @@ const Footer = () => {
     }`)
 
     return(
-        <footer className={ deployed && "open"}>
+        <footer className={ deployed ? "open": ""}>
             <div className="block" onClick={event => setDeployed(!deployed)}>
                 <div className="position">{profile.prismicProfile.data.title}</div>
                 <div className="location">! {profile.prismicProfile.data.location}</div>
@@ -41,7 +41,7 @@ const Footer = () => {
             <div className="name" onClick={event => setDeployed(!deployed)}>Vincent Giardina</div>
             <div className="content">
                 <HeadPic/>
-                { profile.prismicProfile.data.bio.raw.map((p) => <p className="bio">{p.text}</p> ) }
+                { profile.prismicProfile.data.bio.raw.map((p) => <p className="bio" key={"text-" + p.text}>{p.text}</p> ) }
                 <h1>Credits</h1>
                 © {new Date().getFullYear()}, Built with
                 {` `}
