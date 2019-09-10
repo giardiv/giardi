@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 import injectStyle from '../utils/injectStyle';
@@ -120,8 +120,9 @@ const Layout = ({ children }) => {
       background-color: ` + projects.allPrismicProject.edges[0].node. data.color + `;
     }
   `
-  injectStyle(gradient);
-  injectStyle(blockColor);
+  
+  //useEffect(() => function() { }, []);
+  //injectStyle(gradient); injectStyle(blockColor) 
 
   return (
     <>
@@ -133,8 +134,10 @@ const Layout = ({ children }) => {
         <div className={"store level-" + wheelLevel + "" + (status == STATUS_TRANSITION?" deployed":"")}>
           {projectsElements}
         </div>
+        {/* TODO: write the good adress */}
+        <div className="hey">bonjour@giardi.fr</div>
         <main className={(status == STATUS_PROJECT?"open":"")}>{children}</main>
-        <Footer/>
+        <Footer gradient={gradient} blockColor={blockColor}/>
       </div>
     </>
   )

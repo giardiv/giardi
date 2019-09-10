@@ -3,7 +3,7 @@ import { useStaticQuery, graphql } from "gatsby"
 import Img from "gatsby-image"
 import HeadPic from "./headpic"
 
-const Footer = () => {
+const Footer = (props) => {
     const [deployed, setDeployed] = useState(
         false
     );
@@ -34,6 +34,7 @@ const Footer = () => {
 
     return(
         <footer className={ deployed ? "open": ""}>
+            <style>{props.gradient} {props.blockColor}</style>
             <div className="block" onClick={event => setDeployed(!deployed)}>
                 <div className="position">{profile.prismicProfile.data.title}</div>
                 <div className="location">! {profile.prismicProfile.data.location}</div>
