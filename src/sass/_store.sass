@@ -1,0 +1,68 @@
+
+///////////////////////////////////////////////////////////////////////// STORE
+
+.store
+    float: right
+    +rprop(width, 100%, 0.5)
+    padding: 60px 0
+    height: 100vh
+    position: relative
+    @for $i from 0 through $item-max
+        &.level-#{$i}
+            &.deployed
+                a:nth-child(-n+#{($i)}) .project
+                    top: - $project-height
+                a:nth-child(n+#{$i + 2}) .project
+                    top: 100vh
+                a:nth-child(#{$i + 1}) .project
+                    top: $store-padding
+    @for $i from 0 through $item-max
+        a:nth-child(#{$i}) .project
+            top: $i * $project-height - $project-height + $store-padding
+    .project
+        width: 100%
+        display: block
+        height: $project-height
+        position: absolute
+        cursor: pointer
+        transition: 0.5s top cubic-bezier(0, 0, 0.15, 0.99)
+        &:last-child
+            margin-bottom: $store-padding
+        h1
+            position: absolute
+            opacity: 1
+            font-size: $project-height * 0.5
+            font-family: GT America
+        h1:last-of-type
+            transition: 0.1s margin linear
+        h1:first-child
+            opacity: 0
+            transition: 0.1s opacity linear
+        .tag
+            float: right
+            margin-top: $project-height * 0.6
+            //border: 1px solid
+            padding: 3px 0px
+            margin-right: 10px
+            font-weight: 400
+            opacity: 0
+            transition: 0.3s all linear
+        .year
+            float: left
+            margin-top: $project-height * 0.6
+            padding: 3px 6px
+            font-weight: 900
+            margin-left: 3px
+            color: White
+            opacity: 0
+            transition: 0.3s all linear
+        &:hover
+            h1:last-of-type
+                margin-top: -2px
+                margin-left: 2px
+            h1:first-child
+                opacity: 1
+            .year
+                opacity: 1
+            .tag
+                opacity: 1

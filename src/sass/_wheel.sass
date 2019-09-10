@@ -1,0 +1,60 @@
+
+///////////////////////////////////////////////////////////////////////// WHEEL
+
+.wheel
+    +rprop(width, 100%, $wheel-prop)
+    +rprop(height, 100%, $wheel-prop)
+    position: fixed
+    transform: rotate(0)
+    +media($bp1)
+        transform-origin: $c1*$width-prop/2 $c1*$wheel-prop
+        margin-left: -1 * $c1*$wheel-prop + $c1*$width-prop/$postcard-ratio / 2
+        margin-top: -1 * $c1*$wheel-prop
+    +media($bp2)
+        transform-origin: $c2*$width-prop/2 $c2*$wheel-prop
+        margin-left: -1 * $c2*$wheel-prop + $c2*$width-prop/$postcard-ratio / 2
+        margin-top: -1 * $c2*$wheel-prop
+    +media($bp3)
+        transform-origin: $c3*$width-prop/2 $c3*$wheel-prop
+        margin-left: -1 * $c3*$wheel-prop + $c3*$width-prop/$postcard-ratio / 2
+        margin-top: -1 * $c3*$wheel-prop
+    
+    // transform-origin: $postcard-width/2 $wheel-inner-size
+    // margin-left: -1 * $wheel-inner-size + $postcard-height / 2
+    // margin-top: -1 * $wheel-inner-size //+ $postcard-height / 2
+    top: 50vh
+    transition: .5s transform cubic-bezier(0, 0, 0, 0.99)
+    @for $i from 0 through $item-max
+        &.level-#{$i}
+            transform: rotate( #{ -1 * ( $i ) * $wheel-interval}deg )
+            &.deployed
+                .postcard
+                    transition: 1s transform cubic-bezier(1, 0, 1, 1)
+                    &:nth-child(#{$i})
+                        transform: rotate(#{ $wheel-start-angle + ( $i - 1 ) * $wheel-interval - 90}deg)
+                    &:nth-child(#{$i + 2})
+                        transform: rotate(#{ $wheel-start-angle + ( $i - 1 ) * $wheel-interval + 90}deg)
+    .postcard
+        +media($bp1)
+            transform-origin: $c1*$width-prop/2 $c1*$wheel-prop
+        +media($bp2)
+            transform-origin: $c2*$width-prop/2 $c2*$wheel-prop
+        +media($bp3)
+            transform-origin: $c3*$width-prop/2 $c3*$wheel-prop
+        
+        //transform-origin: $postcard-width/2 $wheel-inner-size
+        position: absolute
+        top: 0
+        left: 0
+        transition: 1s transform cubic-bezier(1, 0, 1, 1)
+        .gatsby-image-wrapper
+            +rprop(width, 100%, $width-prop)
+            //width: $postcard-width
+            transform: rotate(-90deg)
+            border: 0px Solid
+            transition: 0.3s all linear
+            &.selected
+                border: $image-border Solid
+        @for $i from 1 through $item-max
+            &:nth-child(#{$i})
+                transform: rotate(#{ $wheel-start-angle + ( $i - 1 ) * $wheel-interval}deg)

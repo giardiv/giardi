@@ -15,6 +15,13 @@ const Layout = ({ children }) => {
     0
   );
 
+  const STATUS_MENU = "menu";
+  const STATUS_TRANSITION = "transition"
+  const STATUS_PROJECT = "project"
+  const [status, setStatus] = useState(
+    STATUS_MENU
+  );
+
   const projects = useStaticQuery(graphql`
   query {
     allPrismicProject {
@@ -58,19 +65,25 @@ const Layout = ({ children }) => {
   // TODO: add a graphical signature indicating the current project in the wheel  
 
   const projectsElements = projects.allPrismicProject.edges.map((item, key) =>{
-          const anim = (node, e, exit, entry) => {
-            anime({
-              targets: 'main',
-              translateX: 250
-            });
+          const animOut = (node, e, exit, entry) => {
+            setStatus(STATUS_TRANSITION);
+          }
+          const animIn = (node, e, exit, entry) => {
+            setStatus(STATUS_PROJECT);
           }
           return(
             <TransitionLink to={ "/" + item.node.slugs[0] }
             exit={{
-              trigger: ({ node, e, exit, entry }) => anim(node, e, exit, entry)
+              trigger: ({ node, e, exit, entry }) => animOut(node, e, exit, entry),
+              length: 0.5,
+              state: {
+                mode: "in"
+              }
             }}
             entry={{
-              trigger: ({ node, e, exit, entry }) => anim(node, e, exit, entry)
+              trigger: ({ node, e, exit, entry }) => animIn(node, e, exit, entry),
+              length: 0.5,
+              delay: 0.5
             }}
             >
               <div className="project" id={key} onMouseEnter={event => setWheelLevel(key)}>
@@ -114,13 +127,13 @@ const Layout = ({ children }) => {
     <>
       {/* <Header siteTitle={data.site.siteMetadata.title} /> */}
       <div className="container">
-        <div className={"wheel level-" + wheelLevel}>
+        <div className={"wheel level-" + wheelLevel + "" + (status == STATUS_TRANSITION?" deployed":"")}>
           {projectPictures}
         </div>
-        <div className="store">
+        <div className={"store level-" + wheelLevel + "" + (status == STATUS_TRANSITION?" deployed":"")}>
           {projectsElements}
         </div>
-        <main>{children}</main>
+        <main className={(status == STATUS_PROJECT?"open":"")}>{children}</main>
         <Footer/>
       </div>
     </>

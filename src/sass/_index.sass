@@ -1,160 +1,28 @@
-
-$black: Black
-$white: White
+///////////////////////////////////////////////////////////////////////// INDEX
 
 body
     font-family: IBM Plex Sans
 
-$container-width: 960px
-// TODO: set responsive container
 .container
     margin: 0 auto
-    max-width: $container-width
+    width: 100%
     padding: 0
     position: relative
     height: 100vh
+    //background: Yellow
+    +rprop(width, 100%, 1)
 
 $footer-head-height: 66px
 
-footer
-    display: block
-    position: fixed
-    left: 50%
-    width: 50vw
-    top: calc(100vh - #{$footer-head-height})
-    height: $footer-head-height
-    border: 3px Solid $black
-    transition: 0.2s all ease-in-out
-    background: $white
-    .block
-        width: 100%
-        font-weight: 500
-        padding: 9px 16px 7px 16px
-        cursor: pointer
-        .position
-            font-size: 18px
-        .location
-            font-size: 12px
-    .name
-        cursor: pointer
-        background: $black
-        color: $white
-        font-weight: 600
-        font-family: GT America
-        padding: 18px 24px 22px 24px
-        position: absolute
-        right: 0
-        top: 0
-        font-size: 20px
-    &.open
-        top: 0
-        height: 100vh
-        .block
-            animation: gradient 60s infinite
-    .content
-        padding: 20px 40px
-        overflow-y: auto
-        height: calc(100vh - #{$footer-head-height})
-        .bio
-            font-style: italic
-            font-weight: 400
+a
+    color: $black
 
 
-$postcard-width: 400px
-$postcard-height: 266px
-$wheel-inner-size: 1200px
+///////////////////////////////////////////////////////////////////////// WHEEL
+@import ./wheel
 
-$wheel-start-angle: 90 //deg
-$wheel-interval: 20 //deg
-
-$item-max: 12 // Max number of items
-
-.wheel
-    width: $wheel-inner-size
-    //background: red
-    height: $wheel-inner-size
-    position: fixed
-    transform: rotate(0)
-    transform-origin: $postcard-width/2 $wheel-inner-size
-    margin-left: -1 * $wheel-inner-size + $postcard-height / 2
-    margin-top: -1 * $wheel-inner-size //+ $postcard-height / 2
-    top: 50vh
-    transition: .5s transform cubic-bezier(0, 0, 0, 0.99)
-    @for $i from 0 through $item-max
-        &.level-#{$i}
-            transform: rotate( #{ -1 * ( $i ) * $wheel-interval}deg )
-    // TODO : keep that model ?
-    .postcard
-        transform-origin: $postcard-width/2 $wheel-inner-size
-        position: absolute
-        top: 0
-        left: 0
-        .gatsby-image-wrapper
-            width: $postcard-width
-            transform: rotate(-90deg)
-            border: 0px Solid
-            transition: 0.3s all linear
-            &.selected
-                border: 6px Solid
-        @for $i from 1 through $item-max
-            &:nth-child(#{$i})
-                transform: rotate(#{ $wheel-start-angle + ( $i - 1 ) * $wheel-interval}deg)
-
-$wheel-store-margin: 80px
-$project-height: 100px
-
-.store
-    float: right
-    width: $container-width - $postcard-width - $wheel-store-margin
-    padding: 60px 0
-    .project
-        width: 100%
-        display: block
-        height: $project-height
-        cursor: pointer
-        h1
-            position: absolute
-            opacity: 1
-            font-size: $project-height * 0.5
-            font-family: GT America
-        h1:last-of-type
-            transition: 0.1s margin linear
-        h1:first-child
-            opacity: 0
-            transition: 0.1s opacity linear
-        .tag
-            float: right
-            margin-top: $project-height * 0.6
-            //border: 1px solid
-            padding: 3px 0px
-            margin-right: 10px
-            font-weight: 400
-            opacity: 0
-            transition: 0.3s all linear
-        .year
-            float: left
-            margin-top: $project-height * 0.6
-            padding: 3px 6px
-            font-weight: 900
-            margin-left: 3px
-            color: White
-            opacity: 0
-            transition: 0.3s all linear
-        &:hover
-            h1:last-of-type
-                margin-top: -2px
-                margin-left: 2px
-            h1:first-child
-                opacity: 1
-            .year
-                opacity: 1
-            .tag
-                opacity: 1
-
-main
-    position: fixed
-    top: 50vh
-    background: Red
+///////////////////////////////////////////////////////////////////////// STORE
+@import ./store
 
 
 

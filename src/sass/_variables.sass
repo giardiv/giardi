@@ -1,0 +1,71 @@
+
+///////////////////////////////////////////////////////////////////////// COLORS
+
+$black: Black
+$white: White
+
+///////////////////////////////////////////////////////////////////////// RESPONSIVE
+// Mobile version under 768px
+$rs: 768px 760px, 992px 984px, 1200px 1192px
+
+$bp1: nth(nth($rs, 1),1)
+$bp2: nth(nth($rs, 2),1)
+$bp3: nth(nth($rs, 3),1)
+
+$c1: nth(nth($rs, 1),2)
+$c2: nth(nth($rs, 2),2)
+$c3: nth(nth($rs, 3),2)
+
+@mixin rprop($property, $mobile-value, $default-percent, $offset:0)
+    #{$property}: $mobile-value
+    @each $dim in $rs
+        @media screen and (min-width: #{nth($dim, 1)})
+            #{$property}: $default-percent * nth($dim, 2) + $offset
+
+// 3bps
+@mixin rprop-values($property, $mobile-value, $v1, $v2, $v3)
+    #{$property}: $mobile-value
+    @media screen and (min-width: $bp1)
+        #{$property}: $v1
+    @media screen and (min-width: $bp2)
+        #{$property}: $v2
+    @media screen and (min-width: $bp3)
+        #{$property}: $v3
+
+@mixin media($width)
+    @media only screen and (min-width: $width)
+        @content
+
+///////////////////////////////////////////////////////////////////////// WHEEL
+
+$postcard-ratio: 3/2
+$width-prop: 1/2.4
+
+// $c1*$width-prop   ||   +rprop(width, 100%, $width-prop)
+$postcard-width: 500px
+// $c1*$width-prop/$postcard-ratio   ||   +rprop(width, 100%, $width-prop/$postcard-ratio)
+$postcard-height: $postcard-width / $postcard-ratio
+
+$wheel-prop: 1.25
+
+// $c1*$wheel-prop
+$wheel-inner-size: 1500px
+
+$wheel-start-angle: 90 //deg
+$wheel-interval: 20 //deg
+
+$item-max: 12 // Max number of items
+
+$image-border: 6px
+
+
+
+$wheel-store-margin: 80px
+$project-height: 100px
+$store-padding: 80px
+
+
+///////////////////////////////////////////////////////////////////////// PROJECT
+
+$project-top: 40px
+$deploy-prod: 0.618

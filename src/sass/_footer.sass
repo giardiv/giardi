@@ -1,0 +1,45 @@
+
+///////////////////////////////////////////////////////////////////////// FOOTER
+
+footer
+    display: block
+    position: fixed
+    left: 50%
+    width: 50vw
+    top: calc(100vh - #{$footer-head-height})
+    height: $footer-head-height
+    border: 3px Solid $black
+    transition: 0.2s all ease-in-out
+    background: $white
+    .block
+        width: 100%
+        font-weight: 500
+        padding: 9px 16px 7px 16px
+        cursor: pointer
+        .position
+            font-size: 18px
+        .location
+            font-size: 12px
+    .name
+        cursor: pointer
+        background: $black
+        color: $white
+        font-weight: 600
+        font-family: GT America
+        padding: 18px 24px 22px 24px
+        position: absolute
+        right: 0
+        top: 0
+        font-size: 20px
+    &.open
+        top: 0
+        height: 100vh
+        .block
+            animation: gradient 60s infinite
+    .content
+        padding: 20px 40px
+        overflow-y: auto
+        height: calc(100vh - #{$footer-head-height})
+        .bio
+            font-style: italic
+            font-weight: 400

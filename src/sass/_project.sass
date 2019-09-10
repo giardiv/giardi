@@ -1,0 +1,54 @@
+
+///////////////////////////////////////////////////////////////////////// PROJECT
+
+main
+    >div
+        position: fixed
+        top: 0
+        height: 100vh
+        width: 100vw
+        background: $white
+        //opacity: 0.3
+        left: 0
+        header
+            +rprop(height, 100%, $deploy-prod/$postcard-ratio, $project-top)
+            //height: $final-height + $project-top
+            width: 100%
+            position: absolute
+            .cover
+                +rprop(width, 100%, $width-prop)
+                //width: $postcard-width
+                +rprop(height, 100%, $width-prop/$postcard-ratio,  - 2 * $image-border)
+                //height: $postcard-height - 2 * $image-border
+                top: 50vh
+                +media($bp1)
+                    margin-top: calc(50vh - #{$c1*$width-prop/$postcard-ratio} / 2 + #{$image-border})
+                +media($bp2)
+                    margin-top: calc(50vh - #{$c2*$width-prop/$postcard-ratio} / 2 + #{$image-border})
+                +media($bp3)
+                    margin-top: calc(50vh - #{$c3*$width-prop/$postcard-ratio} / 2 + #{$image-border})
+                margin-left: $image-border
+                border: $image-border Solid blue
+                box-sizing: border-box
+                transition: 0.2s all linear
+                .gatsby-image-wrapper
+                    width: 100%
+                    height: 100%
+                &.deployed
+                    top: 0
+                    margin-top: $project-top
+                    border-width: 0
+                    +rprop(width, 100%, $deploy-prod)
+                    +rprop(height, 100%, $deploy-prod/$postcard-ratio)
+                    //width: $final-width
+                    //height: $final-height
+            h1
+                position: absolute
+                opacity: 1
+                font-size: $project-height * 0.5
+                font-family: GT America
+                +rprop(left, 100%, 0.5)
+                top: $store-padding
+            h1:last-of-type
+                margin-top: -2px
+                margin-left: 2px
