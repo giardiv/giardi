@@ -35,13 +35,7 @@ const Layout = ({ children }) => {
             }
             with
             year
-            tags {
-              tag {
-                raw {
-                  slug
-                }
-              }
-            }
+            tags
             cover {
               localFile {
                 childImageSharp {
@@ -89,9 +83,10 @@ const Layout = ({ children }) => {
               <div className="project" id={key} onMouseEnter={event => setWheelLevel(key)}>
                   <h1 style={{color: item.node.data.color}}>{item.node.data.name.text}</h1>
                   <h1>{item.node.data.name.text}</h1>
-                  {
+                  <div className="tag" style={{ borderColor: item.node.data.color}}>{item.node.data.tags}</div>
+                  {/* {
                     item.node.data.tags.map((tag) => <div className="tag" key={tag.tag.raw.slug+key} style={{ borderColor: item.node.data.color}}>{tag.tag.raw.slug}</div>)
-                  }
+                  } */}
                   <div className="year" style={{ backgroundColor: item.node.data.color}}>{item.node.data.year}</div>
               </div>
             </TransitionLink>

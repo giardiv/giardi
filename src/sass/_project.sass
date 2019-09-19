@@ -2,14 +2,31 @@
 ///////////////////////////////////////////////////////////////////////// PROJECT
 
 main
-    >div
+    aside
+        height: 50vh
+    .frame
+        position: fixed
+        width: 100vw
+        height: 100vh
+        left: 0
+        top: 0
+        pointer-events: none
+        border-style: Solid
+        border-width: 3px
+        border-top-width: 10px
+    >.framer
         position: fixed
         top: 0
         height: 100vh
         width: 100vw
-        background: $white
         //opacity: 0.3
         left: 0
+        overflow-y: scroll
+        padding-bottom: 50vh
+        >div
+            background: $white
+            .container
+                height: auto
         header
             +rprop(height, 100%, $deploy-prod/$postcard-ratio, $project-top)
             //height: $final-height + $project-top
@@ -52,3 +69,63 @@ main
             h1:last-of-type
                 margin-top: -2px
                 margin-left: 2px
+            aside
+                position: absolute
+                +rprop(left, 100%, $deploy-prod, 30px)
+                top: 170px
+                &:hover
+                    .year
+                        // TODO: change with font extended
+                        letter-spacing: 20px
+                        transition: letter-spacing 10s linear
+                .year
+                    padding: 8px 16px
+                    font-family: GT America
+                    font-weight: 900
+                    color: $white
+                    display: inline-block
+                    transition: letter-spacing 0.2s linear
+                .abstract
+                    margin-top: 15px
+            .closer
+                position: fixed
+                margin: 20px
+                top: 0
+                z-index: 1000
+        .infos
+            +rprop(padding-top, 100%, $deploy-prod/$postcard-ratio, $project-top + 30px)
+            .row
+                display: row
+                width: 100%
+                margin: 7px 0
+                //padding: 0 3px 3px 0
+                position: relative
+                &:first-child
+                    .value
+                        border-bottom-style: Solid
+                        border-bottom-width: 3px
+                >div
+                    display: inline-block
+                    z-index: 100
+                &:hover
+                    span
+                        width: 10%
+                span
+                    position: absolute
+                    right: 90%
+                    height: 100%
+                    width: 0
+                    z-index: 50
+                    transition: width 0.1s cubic-bezier(0, 0, 0, 1)
+                .label
+                    width: 10%
+                    text-align: right
+                    font-family: IBM Plex Mono
+                    padding: 3px 10px
+                    position: relative
+                .value
+                    font-family: IBM Plex Sans
+                    font-weight: 600
+                    margin: 0 10px
+        .presentation
+            padding: 20px 70px 70px 100px
