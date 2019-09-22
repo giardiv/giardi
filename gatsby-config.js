@@ -46,7 +46,16 @@ module.exports = {
         linkResolver: ({ node, key, value }) => project => `/${project.uid}`,
       },
     },
-    `gatsby-plugin-transition-link`
+    `gatsby-plugin-transition-link`,
+    {
+      resolve: 'gatsby-plugin-web-font-loader',
+      options: {
+        custom: {
+          families: ['poppins', 'ibm-plex-sans', 'ibm-plex-mono'],
+          urls: ['https://use.typekit.net/dwi5qcf.css']
+        }
+      }
+    }
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,

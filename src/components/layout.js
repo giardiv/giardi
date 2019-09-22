@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
-import injectStyle from '../utils/injectStyle';
-import { Link } from "gatsby"
 import TransitionLink from "gatsby-plugin-transition-link"
-import anime from "animejs"
 
 import Footer from "./footer"
 import Img from "gatsby-image"

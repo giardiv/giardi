@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////// INDEX
 
 body
-    font-family: IBM Plex Sans
+    font-family: $text
 
 .container
     margin: 0 auto
@@ -22,8 +22,12 @@ a
     right: 0
     top: 30px
     font-size: 12px
-    font-family: IBM Plex Mono
+    font-family: $mono
     font-weight: 900
+    @media only screen and (max-width: $bp1)
+        width: 100vw
+        text-align: center
+        top: 15px
 
 
 ///////////////////////////////////////////////////////////////////////// WHEEL
