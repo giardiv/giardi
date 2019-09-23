@@ -79,13 +79,13 @@ const Project = (props) => {
                                 <div className="label">I did</div>
                                 <div className="value" style={{borderBottomColor: project.color}}>{project.tags}</div>
                             </div>
-                            { project.with.length > 0 &&
+                            { project.with &&
                             <div className="row">
                                 <span style={{backgroundColor: project.color}}></span>
                                 <div className="label">With</div>
                                 <div className="value">{project.with}</div>
                             </div> }
-                            { project.for.length > 0 &&
+                            { project.for &&
                             <div className="row">
                                 <span style={{backgroundColor: project.color}}></span>
                                 <div className="label">For</div>
