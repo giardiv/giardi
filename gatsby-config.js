@@ -44,7 +44,7 @@ module.exports = {
         repositoryName: `giardi-portfolio`,
         accessToken: `${process.env.API_KEY}`,
         linkResolver: ({ node, key, value }) => project => `/${project.uid}`,
-      },
+      }, 
     },
     `gatsby-plugin-transition-link`,
     {
