@@ -1,0 +1,14 @@
+{
+    "master": {
+        "awscloudformation": {
+            "AuthRoleName": "giardi-master-20190923212701-authRole",
+            "UnauthRoleArn": "arn:aws:iam::501712396057:role/giardi-master-20190923212701-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::501712396057:role/giardi-master-20190923212701-authRole",
+            "Region": "eu-west-2",
+            "DeploymentBucketName": "giardi-master-20190923212701-deployment",
+            "UnauthRoleName": "giardi-master-20190923212701-unauthRole",
+            "StackName": "giardi-master-20190923212701",
+            "StackId": "arn:aws:cloudformation:eu-west-2:501712396057:stack/giardi-master-20190923212701/1e482450-de38-11e9-b5f7-029db6d88004"
+        }
+    }
+}
