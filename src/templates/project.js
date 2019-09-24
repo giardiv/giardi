@@ -109,10 +109,13 @@ const Project = (props) => {
                                 </>
                             )}
                         </div>
+                        <div className="step-gradient"></div>
                     </div>
                 </div>
             </div>
+            
             <div className="frame" style={{ borderColor: project.color, opacity: loadPercent}}></div>
+            
         </Layout>
     )
 }

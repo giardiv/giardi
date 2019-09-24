@@ -51,10 +51,16 @@ module.exports = {
       resolve: 'gatsby-plugin-web-font-loader',
       options: {
         custom: {
-          families: ['poppins', 'ibm-plex-sans', 'ibm-plex-mono'],
-          urls: ['https://use.typekit.net/dwi5qcf.css']
+          families: ['poppins', 'ibm-plex-sans', 'ibm-plex-mono', 'titling-gothic-fb'],
+          urls: ['https://use.typekit.net/dwi5qcf.css', 'https://use.typekit.net/mhh0agh.css']
         }
       }
+    },
+    {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        trackingId: "UA-48552852-4",
+      },
     }
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline

@@ -48,6 +48,7 @@ const Footer = (props) => {
                 {` `}
                 <a href="https://www.gatsbyjs.org">Gatsby</a>
             </div>
+            <div className="step-gradient"></div>
         </footer>
     )
 }
