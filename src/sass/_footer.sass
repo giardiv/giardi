@@ -14,6 +14,7 @@ footer
     border: 3px Solid $black
     transition: 0.2s all ease-in-out
     background: $white
+
     @media screen and (max-width: $bp2)
         width: 100vw
         left: 0
@@ -53,9 +54,29 @@ footer
         padding: 20px 40px
         overflow-y: auto
         height: calc(100vh - #{$footer-head-height})
+        text-align: center
         .bio
             font-style: italic
             font-weight: 400
+            text-align: left
+        h1
+            font-family: $titling
+            text-align: left
+            margin-top: 40px
+        a
+            font-family: $mono
+            padding: 10px 20px
+            border: 2px Solid $black
+            float: left
+            font-weight: 600
+            text-decoration: none
+            margin-right: 10px
+        .file
+            color: $white
+            background: $black
+        .right
+            float: right
+            margin-right: 0
     .step-gradient
         transition: 0.05s all linear
         position: absolute

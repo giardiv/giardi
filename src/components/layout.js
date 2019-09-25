@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 import TransitionLink from "gatsby-plugin-transition-link"
+import Hey from "./hey"
 
 import Footer from "./footer"
 import Img from "gatsby-image"
@@ -127,7 +128,7 @@ const Layout = ({ children }) => {
           {projectsElements}
         </div>
         {/* TODO: write the good adress */}
-        <div className="hey">bonjour@giardi.fr</div>
+        <Hey/>
         <main className={(status == STATUS_PROJECT?"open":"")}>{children}</main>
         <Footer gradient={gradient} blockColor={blockColor}/>
       </div>
