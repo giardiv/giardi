@@ -32,19 +32,35 @@ const Project = (props) => {
         var percent = 1 - framer.scrollTop / (postFramer.clientHeight - framer.clientHeight);
         setLoadPercent(percent);
 
-        //console.log( framer.scrollTop / postFramer.clientHeight)
         if(framer.scrollTop / (postFramer.clientHeight - framer.clientHeight * 0.5) > 1){
             closer.click();
         }
     }
     const animOut = (node, e, exit, entry) => {
-        console.log("ouuut");
         anime({
             targets: '.framer',
             scrollTop: postFramer.clientHeight,
             duration: 200,
             easing: 'linear'
         })
+    }
+
+    const getEmbed = (id) => {
+        switch (id) {
+            case "family_photo_video":
+                return(
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/XSaz2tk92Pw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                )
+                break;
+            case "family_photo_stl":
+                return(
+                    <div></div>//<script src="https://embed.github.com/view/3d/giardiv/files/blob/master/photobooth-toulouse.stl"></script>
+                )
+                break;
+            default:
+                return(<div>Unrecognised embed id</div>)
+                break;
+        }
     }
     return (
         <Layout>
@@ -70,7 +86,7 @@ const Project = (props) => {
                             <h1 classname={(deployed? "deployed" : "")}>{project.name.text}</h1>
                             <aside>
                                 <div className="year" style={{backgroundColor: project.color}}>{project.year}</div>
-                                <div className="abstract"> {project.abstract.text} {project.abstract.text} {project.abstract.text} {project.abstract.text} {project.abstract.text}</div>
+                                <div className="abstract"> {project.abstract.text} </div>
                             </aside>
                         </header>
                         <div className="infos">
@@ -94,19 +110,26 @@ const Project = (props) => {
                         </div>
                         <div className="presentation">
                             {project.presentation.map((pic, key) => 
-                                <>
-                                    <Img fluid={pic.picture.localFile.childImageSharp.fluid}/>
+                                <div>
                                     {
-                                        pic.text &&
-                                        <div className="legend">{pic.text.raw[0].text}</div>
+                                        (pic.type == "image") && 
+                                        <Img className={pic.picture.localFile.childImageSharp.fluid.aspectRatio < 1 ? "portrait" : "landscape"} fluid={pic.picture.localFile.childImageSharp.fluid}/>
                                     }
                                     {
-                                        !key &&
-                                        <div className="middle">
-                                            { project.abstract.text }
-                                        </div>
+                                        (pic.type == "gif") && 
+                                        <img src={pic.picture.localFile.absolutePath} />
                                     }
-                                </>
+                                    {
+                                        (pic.type == "embed") && 
+                                        getEmbed(pic.embed_id)
+                                    }
+                                    {
+                                        pic.text.raw &&
+                                        pic.text.raw.map((raw) => { return(
+                                            <div className={ "legend " + pic.text_length}>{raw.text}</div>)
+                                        })
+                                    }
+                                </div>
                             )}
                         </div>
                         <div className="step-gradient"></div>
@@ -156,8 +179,10 @@ export const query = graphql
                         presentation {
                             picture {
                                 localFile {
+                                    absolutePath
                                     childImageSharp {
                                         fluid(maxWidth: 800) {
+                                            aspectRatio
                                             ...GatsbyImageSharpFluid
                                         }
                                     }
@@ -168,6 +193,9 @@ export const query = graphql
                                     text
                                 }
                             }
+                            embed_id
+                            text_length
+                            type
                         }
                     }
                     slugs

@@ -142,24 +142,37 @@ main
 
             +rprop-values(padding-left, 10px, 80px, 120px, 200px)
             +rprop-values(padding-right, 10px, 80px, 120px, 200px)
+            >div
+                text-align: center
 
             .gatsby-image-wrapper
-                margin: 40px 0
-            .legend
-                margin-top: -20px
-                margin-bottom: 60px
-                margin: -30px 0px 60px 0
+                margin: 40px auto 0 auto
+                &::after
+                    content: ""
+                    height: 100%
+                    width: 100%
+                    background: Black
+                    position: absolute
+                    top: 0
+                    left: 0
+                    opacity: 0.02
+                &.portrait
+                    +rprop-values(max-width, 90%, 400px, 430px, 480px)
+            .short
+                margin: 10px 0px 80px 0
                 width: 100%
                 text-align: right
                 font-family: $mono
                 font-size: 10px
                 font-weight: 800
-            .middle
+            .long
                 text-align: left
-                margin-top: 70px
-                margin-bottom: 70px
+                margin-top: 20px
+                margin-bottom: 20px
                 font-style: italic
                 padding: 0 60px
+                &:last-of-type
+                    margin-bottom: 80px
     .step-gradient
         width: 100vw
         position: absolute

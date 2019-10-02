@@ -44,13 +44,16 @@ const Footer = (props) => {
                 <HeadPic/>
                 { profile.prismicProfile.data.bio.raw.map((p) => <p className="bio" key={"text-" + p.text}>{p.text}</p> ) }
                 <h1>Profiles</h1>
-                <a href={profile.prismicProfile.data.resume.url} classname="file" target="_blank">Résumé</a>
-                <a href={profile.prismicProfile.data.linkedin.url} target="_blank">LinkedIn</a>
-                <a href="https://www.instagram.com/giardiii/" classname="right" target="_blank">Instagram</a>
-                {/* <h1>Credits</h1>
-                © {new Date().getFullYear()}, Built with
-                {` `}
-                <a href="https://www.gatsbyjs.org">Gatsby</a> */}
+                <div className="links">
+                    <a href={profile.prismicProfile.data.resume.url} className="file" target="_blank">Résumé</a>
+                    <a href={profile.prismicProfile.data.linkedin.url} target="_blank">LinkedIn</a>
+                    <a href="https://www.instagram.com/giardiii/" className="right" target="_blank">Instagram</a>
+                </div>
+                <h1>Credits</h1>
+                <div className="credits">
+                    © {new Date().getFullYear()} Vincent Giardina, design and development<br></br>
+                    Built with Gatsby
+                </div>
             </div>
             <div className="step-gradient"></div>
         </footer>

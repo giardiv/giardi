@@ -9,7 +9,7 @@ import("../sass/main.sass")
 const IndexPage = ({data}) => (
   
   <Layout data={data}>
-    <SEO title="Home" />
+    <SEO title="Vincent Giardina" />
     {/* <h1>Hi people</h1>
     <p>Welcome to your new Gatsby site.</p>
     <p>Now go build something great.</p>
