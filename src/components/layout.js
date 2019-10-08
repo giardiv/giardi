@@ -22,7 +22,11 @@ const Layout = ({ children }) => {
 
   const projects = useStaticQuery(graphql`
   query {
-    allPrismicProject {
+    allPrismicProject(
+      sort: {
+        fields: [data___year]
+        order: DESC
+      }){
       edges {
         node {
           data {
