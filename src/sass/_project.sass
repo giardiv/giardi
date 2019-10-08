@@ -99,6 +99,7 @@ main
                 margin: 20px
                 top: 0
                 z-index: 1000
+                margin-top: 35px
         .infos
             +rprop(padding-top, 100%, $deploy-prod/$postcard-ratio, $project-top + 30px)
             .row
@@ -136,7 +137,7 @@ main
                     margin: 0 10px
         .presentation
             padding-top: 40px
-            padding-bottom: 150px
+            padding-bottom: 210px
             // +rprop(padding-left, 100%, 0.15)
             // +rprop(padding-right, 100%, 0.15)
 
@@ -173,9 +174,72 @@ main
                 padding: 0 60px
                 &:last-of-type
                     margin-bottom: 80px
+            .button
+                margin: 80px auto 80px auto
     .step-gradient
         width: 100vw
         position: absolute
         bottom: -110px
         height: 100px
         background: linear-gradient(to top, $gradient-values )
+
+.button
+    position: relative
+    text-align: center
+    padding: 12px 20px
+    background: $black
+    font-family: $titling
+    color:  $white
+    text-decoration: none
+    font-weight: 500
+    border: 2px Solid $black
+    display: inline-block
+    margin: 30px 0
+    width: auto
+    &:hover
+        background: $white
+        color: $black
+
+
+@media only screen and (max-width: $bp1)
+    main
+        .framer header
+            position: relative
+            padding-top: 10px
+            aside
+                top: 100px
+        .framer header .cover.deployed
+            width: 80vw !important
+            margin-left: 10vw !important
+            height: auto !important
+            margin-top: 50px
+        .closer
+            left: 50vw !important
+            top: 100px !important
+            margin: -20px !important
+        h1
+            left: 9vw !important
+            top: 70vw !important
+        .framer .presentation
+            padding: 40px 10vw 210px 10vw
+            .legend
+                padding: 0 !important
+        .framer header aside
+            position: relative
+            left: 0
+            padding: 10vw
+        .framer
+            .infos
+                padding-top: 60%
+                padding: 60% 10vw 10vw 10vw
+                .row
+                    .label
+                        display: block
+                        width: 100%
+                        text-align: left
+                    .value
+                        text-align: right
+                        width: 100%
+                        display: block
+                    span
+                        display: none

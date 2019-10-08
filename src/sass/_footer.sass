@@ -67,7 +67,9 @@ footer
             width: 100%
         .links
             width: 100%
-            height: 50px
+            height: 100px
+            @media screen and (min-width: 1192)
+                height: 50px
             a
                 font-family: $mono
                 padding: 10px 20px
@@ -76,6 +78,7 @@ footer
                 font-weight: 600
                 text-decoration: none
                 margin-right: 10px
+                margin-top: 20px
                 &.file
                     color: $white
                     background: $black
@@ -92,3 +95,20 @@ footer
         width: 0
         top: 0
         background: linear-gradient(to right, $gradient-values )
+    .footer-closer
+        position: absolute
+        height: 100%
+        left: calc(-50vw - 3px)
+        width: 50vw
+        top: 0
+
+@media only screen and (max-width: $bp1)
+    footer
+        top: 0
+        height: 64px
+        overflow: hidden
+        .name
+            width: 100%
+            text-align: center
+        .block
+            margin-top: 64px

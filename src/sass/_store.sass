@@ -78,9 +78,32 @@
 @media only screen and (max-width: $bp1)
     .store
         width: 100vw
-        margin-top: 30vh
-        padding: 10px 30px 70px 30px
+        margin-top: 0vh
+        padding: 70px 30px 70px 30px
+        a
+            display: block
+            margin-bottom: 20px
+            height: 80px
+            border-bottom: 1px Solid
         .project
-            width: calc(100vw - 60px)
-            .tag, .year
-                opacity: 1
+            position: relative
+            top: 0 !important
+            margin-bottom: 0 !important
+            height: auto
+            //padding-top: 80px
+            h1
+                position: absolute !important
+                opacity: 1 !important
+                font-size: 7vw
+                display: block
+                width: 100%
+            h1:last-of-type
+                margin-top: -2px
+                margin-left: 2px
+            .year
+                display: none
+            .tag
+                position: relative !important
+                opacity: 1 !important
+                text-decoration: none !important
+                font-size: 12px

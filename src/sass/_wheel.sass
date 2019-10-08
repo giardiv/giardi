@@ -58,3 +58,8 @@
         @for $i from 1 through $item-max
             &:nth-child(#{$i})
                 transform: rotate(#{ $wheel-start-angle + ( $i - 1 ) * $wheel-interval}deg)
+
+
+@media only screen and (max-width: $bp1)
+    .wheel
+        display: none

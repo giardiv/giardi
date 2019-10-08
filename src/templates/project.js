@@ -3,8 +3,9 @@ import { graphql } from "gatsby"
 import Layout from "../components/layout"
 import TransitionLink from "gatsby-plugin-transition-link"
 import anime from "animejs"
-
+import CloserImg from "../components/close"
 import Img from "gatsby-image"
+import { pctDecChars } from 'uri-js';
 
 
 const Project = (props) => {
@@ -57,6 +58,11 @@ const Project = (props) => {
                     <div></div>//<script src="https://embed.github.com/view/3d/giardiv/files/blob/master/photobooth-toulouse.stl"></script>
                 )
                 break;
+            case "-":
+                return(
+                    ""
+                )
+                break;
             default:
                 return(<div>Unrecognised embed id</div>)
                 break;
@@ -77,7 +83,7 @@ const Project = (props) => {
                                     delay: .2
                                 }}
                             >
-                                <div className="closer" ref={ref => setCloser(ref)}>Close</div>
+                                <div className="closer" ref={ref => setCloser(ref)}><CloserImg/></div>
                             </TransitionLink>
                             <div className={"cover " + (deployed? "deployed" : "")} style={{ borderColor: project.color}}>
                                 <Img  fluid={project.cover.localFile.childImageSharp.fluid} />
@@ -86,7 +92,8 @@ const Project = (props) => {
                             <h1 classname={(deployed? "deployed" : "")}>{project.name.text}</h1>
                             <aside>
                                 <div className="year" style={{backgroundColor: project.color}}>{project.year}</div>
-                                <div className="abstract"> {project.abstract.text} </div>
+                                <div className="abstract">{project.abstract.text} { (project.presentation.filter((pic) => pic.type == "link")[0]) && 
+                                <a target="_blank" className="button" href={project.presentation.filter((pic) => pic.type == "link")[0].embed_id}>{project.presentation.filter((pic) => pic.type == "link")[0].text.raw[0].text}</a>} </div>
                             </aside>
                         </header>
                         <div className="infos">
@@ -117,17 +124,21 @@ const Project = (props) => {
                                     }
                                     {
                                         (pic.type == "gif") && 
-                                        <img src={pic.picture.localFile.absolutePath} />
+                                        <img src={pic.picture.localFile.publicURL} />
                                     }
                                     {
                                         (pic.type == "embed") && 
                                         getEmbed(pic.embed_id)
                                     }
                                     {
-                                        pic.text.raw &&
+                                        (pic.text.raw && pic.type != "link") &&
                                         pic.text.raw.map((raw) => { return(
                                             <div className={ "legend " + pic.text_length}>{raw.text}</div>)
                                         })
+                                    }
+                                    {
+                                        pic.type == "link" &&
+                                        <a className="button" href={pic.embed_id} target="_blank">{pic.text.raw[0].text}</a>
                                     }
                                 </div>
                             )}
@@ -179,7 +190,7 @@ export const query = graphql
                         presentation {
                             picture {
                                 localFile {
-                                    absolutePath
+                                    publicURL
                                     childImageSharp {
                                         fluid(maxWidth: 800) {
                                             aspectRatio

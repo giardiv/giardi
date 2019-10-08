@@ -3,12 +3,12 @@ import { useStaticQuery, graphql } from "gatsby"
 import Img from "gatsby-image"
 
 
-const HeadPic = () => {
+const CloserImg = () => {
     const pic = useStaticQuery(graphql`
     query {
-        file(relativePath: { eq: "face.png" }) {
+        file(relativePath: { eq: "close.png" }) {
             childImageSharp {
-                fixed(width: 200, height: 200) {
+                fixed(width: 30, height: 30) {
                     ...GatsbyImageSharpFixed
                 }
             }
@@ -20,4 +20,4 @@ const HeadPic = () => {
     )
 }
 
-export default HeadPic
+export default CloserImg

@@ -47,6 +47,7 @@ const Footer = (props) => {
                 <div className="links">
                     <a href={profile.prismicProfile.data.resume.url} className="file" target="_blank">Résumé</a>
                     <a href={profile.prismicProfile.data.linkedin.url} target="_blank">LinkedIn</a>
+                    <a href="https://www.behance.net/giardi" target="_blank">Behance</a>
                     <a href="https://www.instagram.com/giardiii/" className="right" target="_blank">Instagram</a>
                 </div>
                 <h1>Credits</h1>
@@ -56,6 +57,7 @@ const Footer = (props) => {
                 </div>
             </div>
             <div className="step-gradient"></div>
+            <div className="footer-closer" onClick={event => setDeployed(false)}></div>
         </footer>
     )
 }
