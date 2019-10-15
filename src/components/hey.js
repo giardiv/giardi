@@ -16,7 +16,7 @@ const Hey = () => {
     }`)
 
     return(
-        <div className="hey"><Img fixed={pic.file.childImageSharp.fixed} /> hey@giardiv.com</div>
+        <div className="hey"><Img fixed={pic.file.childImageSharp.fixed} /><a href="mailto:giardiv@yahoo.com">giardiv@yahoo.com</a><</div>
     )
     
 }
