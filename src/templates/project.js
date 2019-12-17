@@ -55,7 +55,7 @@ const Project = (props) => {
                 break;
             case "nostalgia_video":
                 return(
-                    <iframe width="560" height="315" src="https://www.youtube.com/embed/RakJu0ELd3M" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <iframe width="560" height="315" src="https://www.youtube.com/watch?RakJu0ELd3M" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 )
                 break; 
             case "family_photo_stl":
