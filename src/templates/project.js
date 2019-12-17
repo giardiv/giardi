@@ -53,6 +53,11 @@ const Project = (props) => {
                     <iframe width="560" height="315" src="https://www.youtube.com/embed/XSaz2tk92Pw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 )
                 break;
+            case "nostalgia_video":
+                return(
+                    <iframe width="560" height="315" src="https://www.youtube.com/watch?v=RakJu0ELd3M" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                )
+                break;
             case "family_photo_stl":
                 return(
                     <div></div>//<script src="https://embed.github.com/view/3d/giardiv/files/blob/master/photobooth-toulouse.stl"></script>

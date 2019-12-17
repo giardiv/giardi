@@ -24,7 +24,7 @@ const Layout = ({ children }) => {
   query {
     allPrismicProject(
       sort: {
-        fields: [data___year]
+        fields: [data___year, last_publication_date]
         order: DESC
       }){
       edges {
